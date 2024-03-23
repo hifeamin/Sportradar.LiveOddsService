@@ -31,25 +31,35 @@ namespace Sportradar.LiveOddsService.Business.Tests {
         [Fact]
         public async Task UpdateAsync_ShouldBeSaved() {
             // Arrange
-            var match = new Match() {
+            var newMatchData = new Match() {
                 HomeTeam = "Home Team",
                 AwayTeam = "Away Team",
                 HomeTeamScore = 2,
                 AwayTeamScore = 3
             };
+            var savedMatch = new Match() {
+                HomeTeam = newMatchData.HomeTeam,
+                AwayTeam = newMatchData.AwayTeam,
+                HomeTeamScore = 1,
+                AwayTeamScore = 2
+            };
 
             Mock<IMatchRepository> repositoryMock = new();
-            repositoryMock.Setup(r => r.GetAsync(match.HomeTeam, match.AwayTeam)).ReturnsAsync(match);
-            repositoryMock.Setup(r=>r.UpdateAsync(match)).Returns(Task.CompletedTask);
+            repositoryMock.Setup(r => r.GetAsync(newMatchData.HomeTeam, newMatchData.AwayTeam)).ReturnsAsync(savedMatch);
+            repositoryMock.Setup(r => r.UpdateAsync(savedMatch)).Returns(Task.CompletedTask);
 
             IMatchService matchService = new MatchService(repositoryMock.Object);
 
             // Act
-            await matchService.UpdateAsync(match);
+            await matchService.UpdateAsync(newMatchData);
 
             // Assert
-            repositoryMock.Verify(r => r.UpdateAsync(match), Times.Once());
-
+            repositoryMock.Verify(r => r.UpdateAsync(It.Is<Match>(m =>
+                    m.HomeTeam == savedMatch.HomeTeam &&
+                    m.AwayTeam == savedMatch.AwayTeam &&
+                    m.HomeTeamScore == newMatchData.HomeTeamScore &&
+                    m.AwayTeamScore == newMatchData.AwayTeamScore
+                )), Times.Once());
         }
     }
 }

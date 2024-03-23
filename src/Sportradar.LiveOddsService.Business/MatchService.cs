@@ -20,6 +20,8 @@ namespace Sportradar.LiveOddsService.Business {
             return match;
         }
 
-        public Task UpdateAsync(Match match) => throw new NotImplementedException();
+        public Task UpdateAsync(Match match) {
+            throw new NotImplementedException();
+        }
     }
 }
