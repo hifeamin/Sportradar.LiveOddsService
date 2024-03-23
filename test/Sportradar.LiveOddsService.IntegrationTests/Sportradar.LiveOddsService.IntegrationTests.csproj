@@ -17,6 +17,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Sportradar.LiveOddsService.Business\Sportradar.LiveOddsService.Business.csproj" />
+    <ProjectReference Include="..\..\src\Sportradar.LiveOddsService.Data.InMemoeyCollection\Sportradar.LiveOddsService.Data.InMemoeyCollection.csproj" />
+    <ProjectReference Include="..\..\src\Sportradar.LiveOddsService.Data\Sportradar.LiveOddsService.Data.csproj" />
+    <ProjectReference Include="..\..\src\Sportradar.LiveOddsService.Domain\Sportradar.LiveOddsService.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
 

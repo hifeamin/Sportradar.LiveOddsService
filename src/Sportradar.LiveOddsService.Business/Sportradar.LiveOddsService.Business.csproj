@@ -5,4 +5,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Sportradar.LiveOddsService.Data\Sportradar.LiveOddsService.Data.csproj" />
+    <ProjectReference Include="..\Sportradar.LiveOddsService.Domain\Sportradar.LiveOddsService.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
