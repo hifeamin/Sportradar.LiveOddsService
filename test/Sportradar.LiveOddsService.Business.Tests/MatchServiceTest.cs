@@ -61,5 +61,25 @@ namespace Sportradar.LiveOddsService.Business.Tests {
                     m.AwayTeamScore == newMatchData.AwayTeamScore
                 )), Times.Once());
         }
+
+        [Fact]
+        public async Task FinishAsync_ShouldRemoveFromDatabase() {
+            // Arrange
+            var savedMatch = new Match() {
+                HomeTeam = "Home Team",
+                AwayTeam = "Away Team"
+            };
+            Mock<IMatchRepository> repositoryMock = new();
+            repositoryMock.Setup(r => r.GetAsync(savedMatch.HomeTeam, savedMatch.AwayTeam)).ReturnsAsync(savedMatch);
+            repositoryMock.Setup(r => r.RemoveAsync(It.IsAny<Match>())).Returns(Task.CompletedTask);
+
+            IMatchService matchService = new MatchService(repositoryMock.Object);
+
+            // Act
+            await matchService.FinishAsync(savedMatch.HomeTeam, savedMatch.AwayTeam);
+
+            // Assert
+            repositoryMock.Verify(r => r.RemoveAsync(It.Is<Match>(m => m == savedMatch)), Times.Once());
+        }
     }
 }
