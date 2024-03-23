@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Sportradar.LiveOddsService.Data;
 using Sportradar.LiveOddsService.Domain.Models;
@@ -16,7 +17,11 @@ namespace Sportradar.LiveOddsService.Business {
             await _matchRepository.RemoveAsync(match);
         }
 
-        public Task<IEnumerable<Match>> GetSummeryAsync(MatchSummeryOrder order = MatchSummeryOrder.TotalScoreAndMostRecent) => throw new NotImplementedException();
+        public async Task<IEnumerable<Match>> GetSummeryAsync(MatchSummeryOrder order = MatchSummeryOrder.TotalScoreAndMostRecent) {
+            var data = await _matchRepository.GetAllAsync();
+            return data.OrderByDescending(m => m.HomeTeamScore + m.AwayTeamScore)
+                .ThenByDescending(m => m.StartTime);
+        }
 
         public async Task<Match> StartAsync(string homeTeam, string awayTeam) {
             var match = new Match() {

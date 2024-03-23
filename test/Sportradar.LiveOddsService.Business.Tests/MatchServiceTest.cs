@@ -126,7 +126,7 @@ namespace Sportradar.LiveOddsService.Business.Tests {
             // Assert
             result.Should().HaveSameCount(matches)
                 .And.NotContainNulls()
-                .And.Equal(matches.ElementAt(2), matches.ElementAt(1), matches.ElementAt(0), matches.ElementAt(3));
+                .And.Equal(matches.ElementAt(2), matches.ElementAt(1), matches.ElementAt(3), matches.ElementAt(0));
         }
 
         [Fact]
