@@ -63,6 +63,31 @@ namespace Sportradar.LiveOddsService.Business.Tests {
         }
 
         [Fact]
+        public async Task UpdateAsync_MatchNotFound_ShouldThrowException() {
+            // Arrange
+            var newMatchData = new Match() {
+                HomeTeam = "Home Team",
+                AwayTeam = "Away Team",
+                HomeTeamScore = 2,
+                AwayTeamScore = 3
+            };
+            
+            Mock<IMatchRepository> repositoryMock = new();
+            repositoryMock.Setup(r => r.GetAsync(newMatchData.HomeTeam, newMatchData.AwayTeam)).ReturnsAsync((Match?)null);
+
+            IMatchService matchService = new MatchService(repositoryMock.Object);
+
+            // Act
+            Func<Task> act = () => matchService.UpdateAsync(newMatchData);
+
+            // Assert
+            await act.Should()
+                .ThrowAsync<KeyNotFoundException>()
+                .WithMessage("Match not found!");
+            repositoryMock.Verify(r => r.UpdateAsync(It.IsAny<Match>()), Times.Never());
+        }
+
+        [Fact]
         public async Task FinishAsync_ShouldRemoveFromDatabase() {
             // Arrange
             var savedMatch = new Match() {
@@ -80,6 +105,26 @@ namespace Sportradar.LiveOddsService.Business.Tests {
 
             // Assert
             repositoryMock.Verify(r => r.RemoveAsync(It.Is<Match>(m => m == savedMatch)), Times.Once());
+        }
+
+        [Fact]
+        public async Task FinishAsync_MatchNotFound_ShouldThrowException() {
+            // Arrange
+            string homeTeam = "Home Team";
+            string awayTeam = "Away Team";
+            Mock<IMatchRepository> repositoryMock = new();
+            repositoryMock.Setup(r => r.GetAsync(homeTeam, awayTeam)).ReturnsAsync((Match?)null);
+
+            IMatchService matchService = new MatchService(repositoryMock.Object);
+
+            // Act
+            Func<Task> act = () => matchService.FinishAsync(homeTeam, awayTeam);
+
+            // Assert
+            await act.Should()
+                .ThrowAsync<KeyNotFoundException>()
+                .WithMessage("Match not found!");
+            repositoryMock.Verify(r => r.RemoveAsync(It.IsAny<Match>()), Times.Never());
         }
 
         [Fact]
