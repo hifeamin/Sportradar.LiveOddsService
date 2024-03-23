@@ -1,0 +1,89 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34616.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{FC1BF4B0-DAE2-4020-B5F4-A52434E49821}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{F486F196-1E2F-40C1-BA23-806E41FFF718}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{91609CC3-A88C-438F-ABA3-CEC70D40065F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{AA5E3774-687E-4DC8-960B-51CD085912BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sportradar.LiveOddsService.Business", "src\Sportradar.LiveOddsService.Business\Sportradar.LiveOddsService.Business.csproj", "{DE65ADBC-153E-40B9-AF0D-C72DC94711DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sportradar.LiveOddsService.Data", "src\Sportradar.LiveOddsService.Data\Sportradar.LiveOddsService.Data.csproj", "{8C89DEC0-7959-45AD-82FF-133BD4099910}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sportradar.LiveOddsService.Domain", "src\Sportradar.LiveOddsService.Domain\Sportradar.LiveOddsService.Domain.csproj", "{C8B233E4-B843-4AB2-8095-B7A9D87CE432}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sportradar.LiveOddsService.Data.InMemoeyCollection", "src\Sportradar.LiveOddsService.Data.InMemoeyCollection\Sportradar.LiveOddsService.Data.InMemoeyCollection.csproj", "{B9044E4B-4BB9-49B0-BA49-5475F5FD94EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sportradar.LiveOddsService.UI.API", "src\Sportradar.LiveOddsService.UI.API\Sportradar.LiveOddsService.UI.API.csproj", "{4930582F-608D-4EB4-9BCA-4973E0226622}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sportradar.LiveOddsService.Business.Tests", "test\Sportradar.LiveOddsService.Business.Tests\Sportradar.LiveOddsService.Business.Tests.csproj", "{D2739419-BD9D-41DA-B259-1CD0412D994B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sportradar.LiveOddsService.Data.InMemoeyCollection.Tests", "test\Sportradar.LiveOddsService.Data.InMemoeyCollection.Tests\Sportradar.LiveOddsService.Data.InMemoeyCollection.Tests.csproj", "{A43723D5-6FBB-4C85-AAAA-124DA5E49921}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sportradar.LiveOddsService.IntegrationTests", "test\Sportradar.LiveOddsService.IntegrationTests\Sportradar.LiveOddsService.IntegrationTests.csproj", "{22371738-2F3D-41A0-A5AC-CEB0F5D14AD4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E88BC975-7C16-41D4-9C30-352D520ECF4B}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE65ADBC-153E-40B9-AF0D-C72DC94711DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE65ADBC-153E-40B9-AF0D-C72DC94711DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE65ADBC-153E-40B9-AF0D-C72DC94711DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE65ADBC-153E-40B9-AF0D-C72DC94711DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C89DEC0-7959-45AD-82FF-133BD4099910}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C89DEC0-7959-45AD-82FF-133BD4099910}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C89DEC0-7959-45AD-82FF-133BD4099910}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C89DEC0-7959-45AD-82FF-133BD4099910}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8B233E4-B843-4AB2-8095-B7A9D87CE432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8B233E4-B843-4AB2-8095-B7A9D87CE432}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8B233E4-B843-4AB2-8095-B7A9D87CE432}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8B233E4-B843-4AB2-8095-B7A9D87CE432}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9044E4B-4BB9-49B0-BA49-5475F5FD94EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9044E4B-4BB9-49B0-BA49-5475F5FD94EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9044E4B-4BB9-49B0-BA49-5475F5FD94EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9044E4B-4BB9-49B0-BA49-5475F5FD94EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4930582F-608D-4EB4-9BCA-4973E0226622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4930582F-608D-4EB4-9BCA-4973E0226622}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4930582F-608D-4EB4-9BCA-4973E0226622}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4930582F-608D-4EB4-9BCA-4973E0226622}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2739419-BD9D-41DA-B259-1CD0412D994B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2739419-BD9D-41DA-B259-1CD0412D994B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2739419-BD9D-41DA-B259-1CD0412D994B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2739419-BD9D-41DA-B259-1CD0412D994B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A43723D5-6FBB-4C85-AAAA-124DA5E49921}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A43723D5-6FBB-4C85-AAAA-124DA5E49921}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A43723D5-6FBB-4C85-AAAA-124DA5E49921}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A43723D5-6FBB-4C85-AAAA-124DA5E49921}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22371738-2F3D-41A0-A5AC-CEB0F5D14AD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22371738-2F3D-41A0-A5AC-CEB0F5D14AD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22371738-2F3D-41A0-A5AC-CEB0F5D14AD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22371738-2F3D-41A0-A5AC-CEB0F5D14AD4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DE65ADBC-153E-40B9-AF0D-C72DC94711DD} = {91609CC3-A88C-438F-ABA3-CEC70D40065F}
+		{8C89DEC0-7959-45AD-82FF-133BD4099910} = {F486F196-1E2F-40C1-BA23-806E41FFF718}
+		{B9044E4B-4BB9-49B0-BA49-5475F5FD94EC} = {F486F196-1E2F-40C1-BA23-806E41FFF718}
+		{4930582F-608D-4EB4-9BCA-4973E0226622} = {AA5E3774-687E-4DC8-960B-51CD085912BC}
+		{D2739419-BD9D-41DA-B259-1CD0412D994B} = {FC1BF4B0-DAE2-4020-B5F4-A52434E49821}
+		{A43723D5-6FBB-4C85-AAAA-124DA5E49921} = {FC1BF4B0-DAE2-4020-B5F4-A52434E49821}
+		{22371738-2F3D-41A0-A5AC-CEB0F5D14AD4} = {FC1BF4B0-DAE2-4020-B5F4-A52434E49821}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {27D901F1-4ADD-47E4-9CCC-F9914D3A82FE}
+	EndGlobalSection
+EndGlobal
