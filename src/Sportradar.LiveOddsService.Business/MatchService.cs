@@ -20,8 +20,12 @@ namespace Sportradar.LiveOddsService.Business {
             return match;
         }
 
-        public Task UpdateAsync(Match match) {
-            throw new NotImplementedException();
+        public async Task UpdateAsync(Match match) {
+            var savedMatch = await _matchRepository.GetAsync(match.HomeTeam, match.AwayTeam);
+
+            savedMatch.HomeTeamScore = match.HomeTeamScore;
+            savedMatch.AwayTeamScore = match.AwayTeamScore;
+            await _matchRepository.UpdateAsync(savedMatch);
         }
     }
 }
