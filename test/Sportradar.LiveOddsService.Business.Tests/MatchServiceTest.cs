@@ -13,7 +13,7 @@ namespace Sportradar.LiveOddsService.Business.Tests {
             repositoryMock.Setup(r => r.AddAsync(It.IsAny<Match>())).Returns(Task.CompletedTask);
 
             IMatchService matchService = new MatchService(repositoryMock.Object);
-            string homeTeam = "Home team";
+            string homeTeam = "Home Team";
             string awayTeam = "Away Team";
 
             // Act
@@ -26,6 +26,30 @@ namespace Sportradar.LiveOddsService.Business.Tests {
             result.HomeTeamScore.Should().Be(0);
             result.AwayTeamScore.Should().Be(0);
             repositoryMock.Verify(r => r.AddAsync(result), Times.Once());
+        }
+
+        [Fact]
+        public async Task UpdateAsync_ShouldBeSaved() {
+            // Arrange
+            var match = new Match() {
+                HomeTeam = "Home Team",
+                AwayTeam = "Away Team",
+                HomeTeamScore = 2,
+                AwayTeamScore = 3
+            };
+
+            Mock<IMatchRepository> repositoryMock = new();
+            repositoryMock.Setup(r => r.GetAsync(match.HomeTeam, match.AwayTeam)).ReturnsAsync(match);
+            repositoryMock.Setup(r=>r.UpdateAsync(match)).Returns(Task.CompletedTask);
+
+            IMatchService matchService = new MatchService(repositoryMock.Object);
+
+            // Act
+            await matchService.UpdateAsync(match);
+
+            // Assert
+            repositoryMock.Verify(r => r.UpdateAsync(match), Times.Once());
+
         }
     }
 }

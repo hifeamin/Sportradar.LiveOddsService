@@ -19,5 +19,7 @@ namespace Sportradar.LiveOddsService.Business {
             await _matchRepository.AddAsync(match);
             return match;
         }
+
+        public Task UpdateAsync(Match match) => throw new NotImplementedException();
     }
 }
