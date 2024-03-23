@@ -14,6 +14,9 @@ namespace Sportradar.LiveOddsService.Business {
 
         public async Task FinishAsync(string homeTeam, string awayTeam) {
             var match = await _matchRepository.GetAsync(homeTeam, awayTeam);
+            if(match == null)
+                throw new KeyNotFoundException("Match not found!");
+
             await _matchRepository.RemoveAsync(match);
         }
 
@@ -35,6 +38,8 @@ namespace Sportradar.LiveOddsService.Business {
 
         public async Task UpdateAsync(Match match) {
             var savedMatch = await _matchRepository.GetAsync(match.HomeTeam, match.AwayTeam);
+            if(savedMatch == null)
+                throw new KeyNotFoundException("Match not found!");
 
             savedMatch.HomeTeamScore = match.HomeTeamScore;
             savedMatch.AwayTeamScore = match.AwayTeamScore;
