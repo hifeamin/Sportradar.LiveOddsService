@@ -10,6 +10,14 @@ namespace Sportradar.LiveOddsService.Business {
 
         public MatchService(IMatchRepository matchRepository) => this._matchRepository = matchRepository;
 
-        public Task<Match> StartAsync(string homeTeam, string awayTeam) => throw new NotImplementedException();
+        public async Task<Match> StartAsync(string homeTeam, string awayTeam) {
+            var match = new Match() {
+                HomeTeam = homeTeam,
+                AwayTeam = awayTeam
+            };
+
+            await _matchRepository.AddAsync(match);
+            return match;
+        }
     }
 }
