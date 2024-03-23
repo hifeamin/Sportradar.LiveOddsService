@@ -81,5 +81,67 @@ namespace Sportradar.LiveOddsService.Business.Tests {
             // Assert
             repositoryMock.Verify(r => r.RemoveAsync(It.Is<Match>(m => m == savedMatch)), Times.Once());
         }
+
+        [Fact]
+        public async Task GetSummeryAsync_ShouldReturnDataInTotalScoreAndMostRecentOrder() {
+            // Arrange
+            IEnumerable<Match> matches = [
+                new Match(){
+                    HomeTeam = "Home Team 1",
+                    AwayTeam = "Away Team 1",
+                    HomeTeamScore = 4,
+                    AwayTeamScore = 0,
+                    StartTime = DateTime.Now.AddMinutes(-10),
+                },
+               new Match(){
+                    HomeTeam = "Home Team 2",
+                    AwayTeam = "Away Team 2",
+                    HomeTeamScore = 10,
+                    AwayTeamScore = 2,
+                    StartTime = DateTime.Now.AddMinutes(-15),
+                },
+                new Match(){
+                    HomeTeam = "Home Team 3",
+                    AwayTeam = "Away Team 3",
+                    HomeTeamScore = 6,
+                    AwayTeamScore = 6,
+                    StartTime = DateTime.Now.AddMinutes(-5),
+                },
+                new Match(){
+                    HomeTeam = "Home Team 4",
+                    AwayTeam = "Away Team 4",
+                    HomeTeamScore = 1,
+                    AwayTeamScore = 7,
+                    StartTime = DateTime.Now.AddMinutes(-20),
+                }
+            ];
+            Mock<IMatchRepository> repositoryMock = new();
+            repositoryMock.Setup(r => r.GetAllAsync()).ReturnsAsync(matches);
+
+            IMatchService matchService = new MatchService(repositoryMock.Object);
+
+            // Act
+            IEnumerable<Match> result = await matchService.GetSummeryAsync();
+
+            // Assert
+            result.Should().HaveSameCount(matches)
+                .And.NotContainNulls()
+                .And.Equal(matches.ElementAt(2), matches.ElementAt(1), matches.ElementAt(0), matches.ElementAt(3));
+        }
+
+        [Fact]
+        public async Task GetSummeryAsync_EmptyData_ShouldReturnEmptyCollection() {
+            // Arrange
+            Mock<IMatchRepository> repositoryMock = new();
+            repositoryMock.Setup(r => r.GetAllAsync()).ReturnsAsync([]);
+
+            IMatchService matchService = new MatchService(repositoryMock.Object);
+
+            // Act
+            IEnumerable<Match> result = await matchService.GetSummeryAsync();
+
+            // Assert
+            result.Should().BeEmpty();
+        }
     }
 }
