@@ -6,7 +6,7 @@ using Sportradar.LiveOddsService.Domain.Services;
 
 namespace Sportradar.LiveOddsService.Business {
     public class MatchService: IMatchService {
-        private IMatchRepository _matchRepository;
+        private readonly IMatchRepository _matchRepository;
 
         public MatchService(IMatchRepository matchRepository) => this._matchRepository = matchRepository;
 
