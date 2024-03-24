@@ -80,7 +80,7 @@ namespace Sportradar.LiveOddsService.Data.InMemoeyCollection.Tests {
             // Assert
             result.Should().NotBeNull()
                 .And.HaveCount(2)
-                .And.AllBeEquivalentTo(new Match[] { match1, match2 });
+                .And.BeEquivalentTo(new Match[] { match1, match2 });
         }
     }
 }
