@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Moq;
 using Sportradar.LiveOddsService.Data;
+using Sportradar.LiveOddsService.Domain.Exceptions;
 using Sportradar.LiveOddsService.Domain.Services;
 using Match = Sportradar.LiveOddsService.Domain.Models.Match;
 
@@ -63,6 +64,30 @@ namespace Sportradar.LiveOddsService.Business.Tests {
             await act.Should()
                 .ThrowAsync<NullReferenceException>()
                 .WithMessage("Away team should be filled!");
+            repositoryMock.Verify(r => r.AddAsync(It.IsAny<Match>()), Times.Never());
+        }
+
+        [Fact]
+        public async Task StartAsync_MatchAlreadyStarted_ShouldThrowException() {
+            // Arrange
+            string homeTeam = "Home Team";
+            string awayTeam = "Away team";
+            var savedMatch = new Match() {
+                HomeTeam = homeTeam,
+                AwayTeam = awayTeam
+            };
+            
+            Mock<IMatchRepository> repositoryMock = new();
+            repositoryMock.Setup(r => r.GetAsync(homeTeam, awayTeam)).ReturnsAsync(savedMatch);
+            IMatchService matchService = new MatchService(repositoryMock.Object);
+
+            // Act
+            Func<Task<Match>> act = () => matchService.StartAsync(homeTeam, awayTeam);
+
+            // Assert
+            await act.Should()
+                .ThrowAsync<ItemAlreadyExistException>()
+                .WithMessage("Match already has been started!");
             repositoryMock.Verify(r => r.AddAsync(It.IsAny<Match>()), Times.Never());
         }
 
