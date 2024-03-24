@@ -1,6 +1,8 @@
 ﻿using System.Text.RegularExpressions;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using Sportradar.LiveOddsService.Business.Extensions;
+using Sportradar.LiveOddsService.Data.InMemoeyCollection.Extensions;
 using Sportradar.LiveOddsService.Domain.Services;
 using Match = Sportradar.LiveOddsService.Domain.Models.Match;
 
@@ -10,7 +12,10 @@ namespace Sportradar.LiveOddsService.IntegrationTests {
         public async Task StartNewMatch_GetSummery_ShouldContainTheMatch() {
             // Arrange
             IServiceCollection serviceCollection = new ServiceCollection();
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            IServiceProvider serviceProvider = serviceCollection
+                .AddMatchServices()
+                .AddMatchRepositories()
+                .BuildServiceProvider();
             IServiceScope serviceScope = serviceProvider.CreateScope();
             IMatchService matchService = serviceScope.ServiceProvider.GetService<IMatchService>()!;
             string homeTeam = "Home Team";
@@ -29,7 +34,10 @@ namespace Sportradar.LiveOddsService.IntegrationTests {
         public async Task StartNewMatch_UpdateTheMatch_GetSummery_ShouldContainFinalUpdateMatch() {
             // Arrange
             IServiceCollection serviceCollection = new ServiceCollection();
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            IServiceProvider serviceProvider = serviceCollection
+                .AddMatchServices()
+                .AddMatchRepositories()
+                .BuildServiceProvider();
             IServiceScope serviceScope = serviceProvider.CreateScope();
             IMatchService matchService = serviceScope.ServiceProvider.GetService<IMatchService>()!;
             string homeTeam = "Home Team";
