@@ -28,6 +28,44 @@ namespace Sportradar.LiveOddsService.Business.Tests {
             repositoryMock.Verify(r => r.AddAsync(result), Times.Once());
         }
 
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        public async Task StartAsync_HomeTeamNameIsNull_ShouldThrowException(string homeTeam) {
+            // Arrange
+            Mock<IMatchRepository> repositoryMock = new();
+            IMatchService matchService = new MatchService(repositoryMock.Object);
+            string awayTeam = "Away Team";
+
+            // Act
+            Func<Task<Match>> act = () => matchService.StartAsync(homeTeam, awayTeam);
+
+            // Assert
+            await act.Should()
+                .ThrowAsync<NullReferenceException>()
+                .WithMessage("Home team should be filled!");
+            repositoryMock.Verify(r => r.AddAsync(It.IsAny<Match>()), Times.Never());
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        public async Task StartAsync_AwayTeamNameIsNull_ShouldThrowException(string awayTeam) {
+            // Arrange
+            Mock<IMatchRepository> repositoryMock = new();
+            IMatchService matchService = new MatchService(repositoryMock.Object);
+            string homeTeam = "Home Team";
+
+            // Act
+            Func<Task<Match>> act = () => matchService.StartAsync(homeTeam, awayTeam);
+
+            // Assert
+            await act.Should()
+                .ThrowAsync<NullReferenceException>()
+                .WithMessage("Home team should be filled!");
+            repositoryMock.Verify(r => r.AddAsync(It.IsAny<Match>()), Times.Never());
+        }
+
         [Fact]
         public async Task UpdateAsync_ShouldBeSaved() {
             // Arrange
