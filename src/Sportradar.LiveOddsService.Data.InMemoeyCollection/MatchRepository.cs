@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Sportradar.LiveOddsService.Domain.Models;
 
@@ -10,7 +9,11 @@ namespace Sportradar.LiveOddsService.Data.InMemoeyCollection {
 
         public MatchRepository(DbContext dbContext) => _dbContext = dbContext;
 
-        public Task AddAsync(Match match) => throw new NotImplementedException();
+        public Task AddAsync(Match match) {
+            _dbContext.Matches.Add($"{match.HomeTeam}-{match.AwayTeam}", match);
+            return Task.CompletedTask;
+        }
+
         public Task<IEnumerable<Match>> GetAllAsync() => throw new NotImplementedException();
         public Task<Match?> GetAsync(string homeTeam, string awayTeam) => throw new NotImplementedException();
         public Task RemoveAsync(Match match) => throw new NotImplementedException();
