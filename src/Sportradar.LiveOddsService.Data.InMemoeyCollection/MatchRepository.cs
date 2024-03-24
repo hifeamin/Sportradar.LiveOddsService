@@ -23,7 +23,11 @@ namespace Sportradar.LiveOddsService.Data.InMemoeyCollection {
             return Task.FromResult<Match?>(null);
         }
 
-        public Task RemoveAsync(Match match) => throw new NotImplementedException();
+        public Task RemoveAsync(Match match) {
+            _dbContext.Matches.Remove(GetItemKey(match));
+            return Task.CompletedTask;
+        }
+
         public Task UpdateAsync(Match match) {
             _dbContext.Matches[GetItemKey(match)] = match;
             return Task.CompletedTask;

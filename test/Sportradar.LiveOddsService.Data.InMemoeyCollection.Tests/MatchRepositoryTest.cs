@@ -232,7 +232,7 @@ namespace Sportradar.LiveOddsService.Data.InMemoeyCollection.Tests {
             dbContext.Matches.Should().HaveCount(1)
                 .And.NotContainValue(match)
                 .And.NotContainKey($"Home Team 1-Away Team 1")
-                .And.OnlyContain(m => m.Value.HomeTeam == "Home Team 2" && m.Value.AwayTeam != "Away Team 2");
+                .And.OnlyContain(m => m.Value.HomeTeam == "Home Team 2" && m.Value.AwayTeam == "Away Team 2");
         }
     }
 }
