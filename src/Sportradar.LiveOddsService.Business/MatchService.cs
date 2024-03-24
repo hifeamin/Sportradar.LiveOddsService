@@ -23,8 +23,11 @@ namespace Sportradar.LiveOddsService.Business {
 
         public async Task<IEnumerable<Match>> GetSummeryAsync(MatchSummeryOrder order = MatchSummeryOrder.TotalScoreAndMostRecent) {
             var data = await _matchRepository.GetAllAsync();
-            return data.OrderByDescending(m => m.HomeTeamScore + m.AwayTeamScore)
-                .ThenByDescending(m => m.StartTime);
+            return order switch {
+                MatchSummeryOrder.TotalScoreAndMostRecent => data.OrderByDescending(m => m.HomeTeamScore + m.AwayTeamScore)
+                                        .ThenByDescending(m => m.StartTime),
+                _ => data,
+            };
         }
 
         public async Task<Match> StartAsync(string homeTeam, string awayTeam) {
