@@ -191,5 +191,48 @@ namespace Sportradar.LiveOddsService.Data.InMemoeyCollection.Tests {
             dbContext.Matches["Home Team-Away Team"].HomeTeamScore.Should().Be(1);
             dbContext.Matches["Home Team-Away Team"].AwayTeamScore.Should().Be(2);
         }
+
+        [Fact]
+        public async Task RemoveAsync_RemoveOnlyItem_ShouldRemoveValue() {
+            // Arrange
+            DbContext dbContext = new();
+            Match match = new() {
+                HomeTeam = "Home Team",
+                AwayTeam = "Away Team",
+            };
+            dbContext.Matches.Add("Home Team-Away Team", match);
+            IMatchRepository matchRepository = new MatchRepository(dbContext);
+
+            // Act
+            await matchRepository.RemoveAsync(match);
+
+            // Assert
+            dbContext.Matches.Should().BeEmpty();
+        }
+
+        [Fact]
+        public async Task RemoveAsync_RemoveItem_ShouldRemoveValue() {
+            // Arrange
+            DbContext dbContext = new();
+            Match match = new() {
+                HomeTeam = "Home Team 1",
+                AwayTeam = "Away Team 1",
+            };
+            dbContext.Matches.Add("Home Team 1-Away Team 1", match);
+            dbContext.Matches.Add("Home Team 2-Away Team 2", new Match {
+                HomeTeam = "Home Team 2",
+                AwayTeam = "Away Team 2",
+            });
+            IMatchRepository matchRepository = new MatchRepository(dbContext);
+
+            // Act
+            await matchRepository.RemoveAsync(match);
+
+            // Assert
+            dbContext.Matches.Should().HaveCount(1)
+                .And.NotContainValue(match)
+                .And.NotContainKey($"Home Team 1-Away Team 1")
+                .And.OnlyContain(m => m.Value.HomeTeam == "Home Team 2" && m.Value.AwayTeam != "Away Team 2");
+        }
     }
 }
