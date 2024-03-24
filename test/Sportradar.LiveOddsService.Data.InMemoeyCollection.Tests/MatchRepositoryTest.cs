@@ -163,5 +163,33 @@ namespace Sportradar.LiveOddsService.Data.InMemoeyCollection.Tests {
             result!.HomeTeam.Should().Be(homeTeam);
             result.AwayTeam.Should().Be(awayTeam);
         }
+
+        [Fact]
+        public async Task UpdateAsync_UpdateValue_ValueShouldBeUpdated() {
+            // Arrange
+            DbContext dbContext = new();
+            dbContext.Matches.Add("Home Team-Away Team", new Match() {
+                HomeTeam = "Home Team",
+                AwayTeam = "Away Team",
+                HomeTeamScore = 0,
+                AwayTeamScore = 0
+            });
+            IMatchRepository matchRepository = new MatchRepository(dbContext);
+            Match match = new() {
+                HomeTeam = "Home Team",
+                AwayTeam = "Away Team",
+                HomeTeamScore = 1,
+                AwayTeamScore = 2
+            };
+
+            // Act
+            await matchRepository.UpdateAsync(match);
+
+            // Assert
+            dbContext.Matches.Should().ContainKey("Home Team-Away Team");
+            dbContext.Matches["Home Team-Away Team"].Should().Be(match);
+            dbContext.Matches["Home Team-Away Team"].HomeTeamScore.Should().Be(1);
+            dbContext.Matches["Home Team-Away Team"].AwayTeamScore.Should().Be(2);
+        }
     }
 }
