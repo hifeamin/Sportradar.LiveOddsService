@@ -24,6 +24,9 @@ namespace Sportradar.LiveOddsService.Data.InMemoeyCollection {
         }
 
         public Task RemoveAsync(Match match) => throw new NotImplementedException();
-        public Task UpdateAsync(Match match) => throw new NotImplementedException();
+        public Task UpdateAsync(Match match) {
+            _dbContext.Matches[$"{match.HomeTeam}-{match.AwayTeam}"] = match;
+            return Task.CompletedTask;
+        }
     }
 }
