@@ -86,7 +86,7 @@ namespace Sportradar.LiveOddsService.Business.Tests {
 
             // Assert
             await act.Should()
-                .ThrowAsync<ItemAlreadyExistException>()
+                .ThrowAsync<ItemAlreadyExistException<Match>>()
                 .WithMessage("Match already has been started!");
             repositoryMock.Verify(r => r.AddAsync(It.IsAny<Match>()), Times.Never());
         }

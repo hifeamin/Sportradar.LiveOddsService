@@ -1,9 +1,11 @@
 ﻿using System;
 
 namespace Sportradar.LiveOddsService.Domain.Exceptions {
-    public class ItemAlreadyExistException: Exception {
-        public ItemAlreadyExistException() : base() { }
+    public class ItemAlreadyExistException<T> : Exception {
+        public ItemAlreadyExistException(string message, T existItem) : base(message) {
+            ExistItem = existItem;
+        }
 
-        public ItemAlreadyExistException(string message) : base(message) { }
+        public T ExistItem { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Sportradar.LiveOddsService.Data;
+using Sportradar.LiveOddsService.Domain.Exceptions;
 using Sportradar.LiveOddsService.Domain.Models;
 using Sportradar.LiveOddsService.Domain.Services;
 
@@ -32,11 +33,14 @@ namespace Sportradar.LiveOddsService.Business {
             if(string.IsNullOrEmpty(awayTeam))
                 throw new NullReferenceException("Away team should be filled!");
 
+            var savedMatch = await _matchRepository.GetAsync(homeTeam, awayTeam);
+            if(savedMatch != null)
+                throw new ItemAlreadyExistException<Match>("Match already has been started!", savedMatch);
+
             var match = new Match() {
                 HomeTeam = homeTeam,
                 AwayTeam = awayTeam
             };
-
             await _matchRepository.AddAsync(match);
             return match;
         }
