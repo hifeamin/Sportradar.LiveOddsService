@@ -27,6 +27,11 @@ namespace Sportradar.LiveOddsService.Business {
         }
 
         public async Task<Match> StartAsync(string homeTeam, string awayTeam) {
+            if(string.IsNullOrEmpty(homeTeam))
+                throw new NullReferenceException("Home team should be filled!");
+            if(string.IsNullOrEmpty(awayTeam))
+                throw new NullReferenceException("Away team should be filled!");
+
             var match = new Match() {
                 HomeTeam = homeTeam,
                 AwayTeam = awayTeam

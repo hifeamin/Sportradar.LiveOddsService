@@ -62,7 +62,7 @@ namespace Sportradar.LiveOddsService.Business.Tests {
             // Assert
             await act.Should()
                 .ThrowAsync<NullReferenceException>()
-                .WithMessage("Home team should be filled!");
+                .WithMessage("Away team should be filled!");
             repositoryMock.Verify(r => r.AddAsync(It.IsAny<Match>()), Times.Never());
         }
 
