@@ -61,6 +61,7 @@ namespace Sportradar.LiveOddsService.Data.InMemoeyCollection.Tests {
 
         [Fact]
         public async Task GetAllAsync_WithData_ShouldReturnAllData() {
+            // Arrange
             Match match1 = new() {
                 HomeTeam = "Home Team 1",
                 AwayTeam = "Away Team 1"
@@ -81,6 +82,86 @@ namespace Sportradar.LiveOddsService.Data.InMemoeyCollection.Tests {
             result.Should().NotBeNull()
                 .And.HaveCount(2)
                 .And.BeEquivalentTo(new Match[] { match1, match2 });
+        }
+
+        [Fact]
+        public async Task GetAsync_EmptyCollection_ShouldReturnNull() {
+            // Arrange
+            DbContext dbContext = new();
+            IMatchRepository matchRepository = new MatchRepository(dbContext);
+            string homeTeam = "Home Team";
+            string awayTeam = "Away Team";
+
+            // Act
+            var result = await matchRepository.GetAsync(homeTeam, awayTeam);
+
+            // Assert
+            result.Should().BeNull();
+        }
+
+        [Fact]
+        public async Task GetAsync_NotFound_ShouldReturnNull() {
+            // Arrange
+            DbContext dbContext = new();
+            dbContext.Matches.Add("Home Team 1-Away Team 1", new Match() {
+                HomeTeam = "Home Team 1",
+                AwayTeam = "Away Team 1"
+            });
+            IMatchRepository matchRepository = new MatchRepository(dbContext);
+            string homeTeam = "Home Team 2";
+            string awayTeam = "Away Team 2";
+
+            // Act
+            var result = await matchRepository.GetAsync(homeTeam, awayTeam);
+
+            // Assert
+            result.Should().BeNull();
+        }
+
+        [Fact]
+        public async Task GetAsync_ContainsOnlyTheItem_ShouldReturnItem() {
+            // Arrange
+            DbContext dbContext = new();
+            dbContext.Matches.Add("Home Team 1-Away Team 1", new Match() {
+                HomeTeam = "Home Team 1",
+                AwayTeam = "Away Team 1"
+            });
+            IMatchRepository matchRepository = new MatchRepository(dbContext);
+            string homeTeam = "Home Team 1";
+            string awayTeam = "Away Team 1";
+
+            // Act
+            var result = await matchRepository.GetAsync(homeTeam, awayTeam);
+
+            // Assert
+            result.Should().NotBeNull();
+            result!.HomeTeam.Should().Be(homeTeam);
+            result.AwayTeam.Should().Be(awayTeam);
+        }
+
+        [Fact]
+        public async Task GetAsync_ContainsSomeItem_ShouldReturnItem() {
+            // Arrange
+            DbContext dbContext = new();
+            dbContext.Matches.Add("Home Team 1-Away Team 1", new Match() {
+                HomeTeam = "Home Team 1",
+                AwayTeam = "Away Team 1"
+            });
+            dbContext.Matches.Add("Home Team 2-Away Team 2", new Match() {
+                HomeTeam = "Home Team 2",
+                AwayTeam = "Away Team 2"
+            });
+            IMatchRepository matchRepository = new MatchRepository(dbContext);
+            string homeTeam = "Home Team 2";
+            string awayTeam = "Away Team 2";
+
+            // Act
+            var result = await matchRepository.GetAsync(homeTeam, awayTeam);
+
+            // Assert
+            result.Should().NotBeNull();
+            result!.HomeTeam.Should().Be(homeTeam);
+            result.AwayTeam.Should().Be(awayTeam);
         }
     }
 }
