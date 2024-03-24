@@ -8,22 +8,25 @@ using Match = Sportradar.LiveOddsService.Domain.Models.Match;
 
 namespace Sportradar.LiveOddsService.IntegrationTests {
     public class MatchServiceTest {
-        [Fact]
-        public async Task StartNewMatch_GetSummery_ShouldContainTheMatch() {
-            // Arrange
-            IServiceCollection serviceCollection = new ServiceCollection();
-            IServiceProvider serviceProvider = serviceCollection
+        private IServiceProvider GetServiceProvider() =>
+            new ServiceCollection()
                 .AddMatchServices()
                 .AddMatchRepositories()
                 .BuildServiceProvider();
-            IServiceScope serviceScope = serviceProvider.CreateScope();
-            IMatchService matchService = serviceScope.ServiceProvider.GetService<IMatchService>()!;
+
+        private IMatchService GetMatchService(IServiceProvider serviceProvider) =>
+            serviceProvider.CreateScope().ServiceProvider.GetService<IMatchService>()!;
+
+        [Fact]
+        public async Task StartNewMatch_GetSummery_ShouldContainTheMatch() {
+            // Arrange
+            IServiceProvider serviceProvider = GetServiceProvider();
             string homeTeam = "Home Team";
             string awayTeam = "Away Team";
 
             // Act
-            await matchService.StartAsync(homeTeam, awayTeam);
-            var result = await matchService.GetSummeryAsync();
+            await GetMatchService(serviceProvider).StartAsync(homeTeam, awayTeam);
+            var result = await GetMatchService(serviceProvider).GetSummeryAsync();
 
             // Arrange
             result.Should().HaveCount(1)
@@ -33,25 +36,19 @@ namespace Sportradar.LiveOddsService.IntegrationTests {
         [Fact]
         public async Task StartNewMatch_UpdateTheMatch_GetSummery_ShouldContainFinalUpdateMatch() {
             // Arrange
-            IServiceCollection serviceCollection = new ServiceCollection();
-            IServiceProvider serviceProvider = serviceCollection
-                .AddMatchServices()
-                .AddMatchRepositories()
-                .BuildServiceProvider();
-            IServiceScope serviceScope = serviceProvider.CreateScope();
-            IMatchService matchService = serviceScope.ServiceProvider.GetService<IMatchService>()!;
+            IServiceProvider serviceProvider = GetServiceProvider();
             string homeTeam = "Home Team";
             string awayTeam = "Away Team";
 
             // Act
-            await matchService.StartAsync(homeTeam, awayTeam);
-            await matchService.UpdateAsync(new Match() {
+            await GetMatchService(serviceProvider).StartAsync(homeTeam, awayTeam);
+            await GetMatchService(serviceProvider).UpdateAsync(new Match() {
                 HomeTeam = homeTeam,
                 AwayTeam = awayTeam,
                 HomeTeamScore = 3,
                 AwayTeamScore = 2,
             });
-            var result = await matchService.GetSummeryAsync();
+            var result = await GetMatchService(serviceProvider).GetSummeryAsync();
 
             // Arrange
             result.Should().HaveCount(1);
