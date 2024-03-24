@@ -17,7 +17,12 @@ namespace Sportradar.LiveOddsService.Data.InMemoeyCollection {
         public Task<IEnumerable<Match>> GetAllAsync() =>
             Task.FromResult<IEnumerable<Match>>(_dbContext.Matches.Values);
 
-        public Task<Match?> GetAsync(string homeTeam, string awayTeam) => throw new NotImplementedException();
+        public Task<Match?> GetAsync(string homeTeam, string awayTeam) {
+            if(_dbContext.Matches.TryGetValue($"{homeTeam}-{awayTeam}", out Match data))
+                return Task.FromResult<Match?>(data);
+            return Task.FromResult<Match?>(null);
+        }
+
         public Task RemoveAsync(Match match) => throw new NotImplementedException();
         public Task UpdateAsync(Match match) => throw new NotImplementedException();
     }
