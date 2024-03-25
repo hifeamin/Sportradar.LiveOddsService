@@ -58,5 +58,27 @@ namespace Sportradar.LiveOddsService.IntegrationTests {
             data.HomeTeamScore.Should().Be(3);
             data.AwayTeamScore.Should().Be(2);
         }
+
+        [Fact]
+        public async Task StartNewMatch_UpdateTheMatch_FinishTheMatch_GetSummery_ShouldnotHaveTheMatch() {
+            // Arrange
+            IServiceProvider serviceProvider = GetServiceProvider();
+            string homeTeam = "Home Team";
+            string awayTeam = "Away Team";
+
+            // Act
+            await GetMatchService(serviceProvider).StartAsync(homeTeam, awayTeam);
+            await GetMatchService(serviceProvider).UpdateAsync(new Match() {
+                HomeTeam = homeTeam,
+                AwayTeam = awayTeam,
+                HomeTeamScore = 3,
+                AwayTeamScore = 2,
+            });
+            await GetMatchService(serviceProvider).FinishAsync(homeTeam, awayTeam);
+            var result = await GetMatchService(serviceProvider).GetSummeryAsync();
+
+            // Arrange
+            result.Should().HaveCount(0);
+        }
     }
 }
