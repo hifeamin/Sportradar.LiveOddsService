@@ -23,10 +23,11 @@ namespace Sportradar.LiveOddsService.BDD.StepDefinitions
             _serviceProvider = services.BuildServiceProvider();
         }
         private Match? Result { get; set; }
+        private IEnumerable<Match>? MatchSummery { get; set; }
 
-        [When(@"Start new match for home team ""([^""]*)"" and away team ""([^""]*)""")]
-        public async Task StartNewMatchForHomeTeamAndAwayTeam(string homeTeam, string awayTeam)
-        {
+        [Given(@"start new match for home team ""([^""]*)"" and away team ""([^""]*)""")]
+        [When(@"start new match for home team ""([^""]*)"" and away team ""([^""]*)""")]
+        public async Task WhenStartNewMatchForHomeTeamAndAwayTeam(string homeTeam, string awayTeam) {
             using var scope = _serviceProvider.CreateScope();
             var matchService = scope.ServiceProvider.GetService<IMatchService>();
             Result = await matchService!.StartAsync(homeTeam, awayTeam);
@@ -49,5 +50,29 @@ namespace Sportradar.LiveOddsService.BDD.StepDefinitions
         {
             Result!.AwayTeam.Should().Be(awayTeam);
         }
+
+        [Given(@"wait for (.*) second")]
+        public void GivenWaitForSecond(int second) {
+            Thread.Sleep(second * 1000);
+        }
+
+        [When(@"get match summery")]
+        public async void WhenGetMatchSummery() {
+            using var scope = _serviceProvider.CreateScope();
+            var matchService = scope.ServiceProvider.GetService<IMatchService>();
+            MatchSummery = await matchService!.GetSummeryAsync();
+        }
+
+        [Then(@"the summery should have match with home team ""([^""]*)"" and away team ""([^""]*)"" and consider result")]
+        public void ThenTheSummeryShouldHaveMatchWithHomeTeamAndAwayTeamAndConsiderResult(string homeTeam, string awayTeam) {
+            MatchSummery.Should().Contain(m => m.HomeTeam == homeTeam && m.AwayTeam == awayTeam);
+            Result = MatchSummery!.First(m => m.HomeTeam == homeTeam && m.AwayTeam == awayTeam);
+        }
+
+        [Then(@"start date of result should be older than (.*) second ago")]
+        public void ThenStartDateOfResultShouldBeOlderThanSecondAgo(int second) {
+            Result!.StartTime.Should().BeBefore(DateTime.Now.AddSeconds(-1 * second));
+        }
+
     }
 }
