@@ -19,3 +19,12 @@ team score.
 4. Get a summary of matches in progress ordered by their total score. The matches with the
 same total score will be returned ordered by the most recently started match in the
 scoreboard.
+
+## Implementation notes
+Here is some notes regarding this implementation:
+
+* The DDD anemic model has been chosen for the project architecture because the guidelines emphasize simplicity. Based on complexity and requirements, DDD anemic model or CQRS could be selected.
+* An ASP.Net Web API has been implemented for UI, But the UI could be other project types too.
+* It is mentioned to use TDD approach. At the end of implementation, a BDD project by SpecFlow has been added to solution to have some BDD tests too.
+
+
