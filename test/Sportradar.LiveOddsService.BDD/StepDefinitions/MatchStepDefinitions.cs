@@ -74,8 +74,9 @@ namespace Sportradar.LiveOddsService.BDD.StepDefinitions
             Result!.StartTime.Should().BeBefore(DateTime.Now.AddSeconds(-1 * second));
         }
 
+        [Given(@"update home team ""([^""]*)"" score to (.*) and away team ""([^""]*)"" to (.*)")]
         [When(@"update home team ""([^""]*)"" score to (.*) and away team ""([^""]*)"" to (.*)")]
-        public async Task WhenUpdateHomeTeamScoreToAndAwayTeamTo(string homeTeam, int homeTeamScore, string awayTeam, int awayTeamScore) {
+        public async Task UpdateHomeTeamScoreToAndAwayTeamTo(string homeTeam, int homeTeamScore, string awayTeam, int awayTeamScore) {
             using var scope = _serviceProvider.CreateScope();
             var matchService = scope.ServiceProvider.GetService<IMatchService>();
             await matchService!.UpdateAsync(new Match {
@@ -94,6 +95,13 @@ namespace Sportradar.LiveOddsService.BDD.StepDefinitions
         [Then(@"the result should have away team score (.*)")]
         public void ThenTheResultShouldHaveAwayTeamScore(int awayTeamScore) {
             Result!.AwayTeamScore.Should().Be(awayTeamScore);
+        }
+
+        [Then(@"match beween home team ""([^""]*)"" and away team ""([^""]*)"" should be in index (.*)")]
+        public void ThenMatchBeweenHomeTeamAndAwayTeamShouldBeInIndex(string homeTeam, string awayTeam, int index) {
+            var item = MatchSummery!.ElementAt(index);
+            item.HomeTeam.Should().Be(homeTeam);
+            item.AwayTeam.Should().Be(awayTeam);
         }
 
     }
