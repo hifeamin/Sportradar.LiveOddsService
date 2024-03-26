@@ -11,26 +11,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{91
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{AA5E3774-687E-4DC8-960B-51CD085912BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sportradar.LiveOddsService.Business", "src\Sportradar.LiveOddsService.Business\Sportradar.LiveOddsService.Business.csproj", "{DE65ADBC-153E-40B9-AF0D-C72DC94711DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sportradar.LiveOddsService.Business", "src\Sportradar.LiveOddsService.Business\Sportradar.LiveOddsService.Business.csproj", "{DE65ADBC-153E-40B9-AF0D-C72DC94711DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sportradar.LiveOddsService.Data", "src\Sportradar.LiveOddsService.Data\Sportradar.LiveOddsService.Data.csproj", "{8C89DEC0-7959-45AD-82FF-133BD4099910}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sportradar.LiveOddsService.Data", "src\Sportradar.LiveOddsService.Data\Sportradar.LiveOddsService.Data.csproj", "{8C89DEC0-7959-45AD-82FF-133BD4099910}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sportradar.LiveOddsService.Domain", "src\Sportradar.LiveOddsService.Domain\Sportradar.LiveOddsService.Domain.csproj", "{C8B233E4-B843-4AB2-8095-B7A9D87CE432}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sportradar.LiveOddsService.Domain", "src\Sportradar.LiveOddsService.Domain\Sportradar.LiveOddsService.Domain.csproj", "{C8B233E4-B843-4AB2-8095-B7A9D87CE432}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sportradar.LiveOddsService.Data.InMemoeyCollection", "src\Sportradar.LiveOddsService.Data.InMemoeyCollection\Sportradar.LiveOddsService.Data.InMemoeyCollection.csproj", "{B9044E4B-4BB9-49B0-BA49-5475F5FD94EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sportradar.LiveOddsService.Data.InMemoeyCollection", "src\Sportradar.LiveOddsService.Data.InMemoeyCollection\Sportradar.LiveOddsService.Data.InMemoeyCollection.csproj", "{B9044E4B-4BB9-49B0-BA49-5475F5FD94EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sportradar.LiveOddsService.UI.API", "src\Sportradar.LiveOddsService.UI.API\Sportradar.LiveOddsService.UI.API.csproj", "{4930582F-608D-4EB4-9BCA-4973E0226622}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sportradar.LiveOddsService.UI.API", "src\Sportradar.LiveOddsService.UI.API\Sportradar.LiveOddsService.UI.API.csproj", "{4930582F-608D-4EB4-9BCA-4973E0226622}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sportradar.LiveOddsService.Business.Tests", "test\Sportradar.LiveOddsService.Business.Tests\Sportradar.LiveOddsService.Business.Tests.csproj", "{D2739419-BD9D-41DA-B259-1CD0412D994B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sportradar.LiveOddsService.Business.Tests", "test\Sportradar.LiveOddsService.Business.Tests\Sportradar.LiveOddsService.Business.Tests.csproj", "{D2739419-BD9D-41DA-B259-1CD0412D994B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sportradar.LiveOddsService.Data.InMemoeyCollection.Tests", "test\Sportradar.LiveOddsService.Data.InMemoeyCollection.Tests\Sportradar.LiveOddsService.Data.InMemoeyCollection.Tests.csproj", "{A43723D5-6FBB-4C85-AAAA-124DA5E49921}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sportradar.LiveOddsService.Data.InMemoeyCollection.Tests", "test\Sportradar.LiveOddsService.Data.InMemoeyCollection.Tests\Sportradar.LiveOddsService.Data.InMemoeyCollection.Tests.csproj", "{A43723D5-6FBB-4C85-AAAA-124DA5E49921}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sportradar.LiveOddsService.IntegrationTests", "test\Sportradar.LiveOddsService.IntegrationTests\Sportradar.LiveOddsService.IntegrationTests.csproj", "{22371738-2F3D-41A0-A5AC-CEB0F5D14AD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sportradar.LiveOddsService.IntegrationTests", "test\Sportradar.LiveOddsService.IntegrationTests\Sportradar.LiveOddsService.IntegrationTests.csproj", "{22371738-2F3D-41A0-A5AC-CEB0F5D14AD4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E88BC975-7C16-41D4-9C30-352D520ECF4B}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sportradar.LiveOddsService.BDD", "test\Sportradar.LiveOddsService.BDD\Sportradar.LiveOddsService.BDD.csproj", "{2DD91AA7-998E-441A-8639-D0EB0F308C5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,6 +72,10 @@ Global
 		{22371738-2F3D-41A0-A5AC-CEB0F5D14AD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22371738-2F3D-41A0-A5AC-CEB0F5D14AD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22371738-2F3D-41A0-A5AC-CEB0F5D14AD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DD91AA7-998E-441A-8639-D0EB0F308C5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DD91AA7-998E-441A-8639-D0EB0F308C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DD91AA7-998E-441A-8639-D0EB0F308C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DD91AA7-998E-441A-8639-D0EB0F308C5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +88,7 @@ Global
 		{D2739419-BD9D-41DA-B259-1CD0412D994B} = {FC1BF4B0-DAE2-4020-B5F4-A52434E49821}
 		{A43723D5-6FBB-4C85-AAAA-124DA5E49921} = {FC1BF4B0-DAE2-4020-B5F4-A52434E49821}
 		{22371738-2F3D-41A0-A5AC-CEB0F5D14AD4} = {FC1BF4B0-DAE2-4020-B5F4-A52434E49821}
+		{2DD91AA7-998E-441A-8639-D0EB0F308C5B} = {FC1BF4B0-DAE2-4020-B5F4-A52434E49821}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27D901F1-4ADD-47E4-9CCC-F9914D3A82FE}
