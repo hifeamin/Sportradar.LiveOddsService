@@ -185,8 +185,8 @@ namespace Sportradar.LiveOddsService.Data.InMemoeyCollection.Tests {
 
             // Assert
             result.Should().NotBeNull();
-            result!.HomeTeam.Should().Be(homeTeam);
-            result.AwayTeam.Should().Be(awayTeam);
+            result!.HomeTeam.Should().BeEquivalentTo(homeTeam);
+            result.AwayTeam.Should().BeEquivalentTo(awayTeam);
         }
 
         [Fact]
